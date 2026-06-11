@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farm to Door — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Satisfy&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #F5FBF0;
+      --navy2:   #FFFFFF;
+      --navy3:   #E8F5E0;
+      --purple:  #2E8B22;
+      --purple2: #256B1A;
+      --coral:   #E8002A;
+      --yellow:  #D97706;
+      --cyan:    #E05C00;
+      --green:   #2E8B22;
+      --white:   #1A2E0A;
+      --muted:   #64748B;
+      --border:  rgba(0,0,0,0.08);
+      --sidebar-w: 240px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── LAYOUT ── */
+    .app { display: flex; height: 100vh; overflow: hidden; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--navy2);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #2E8B22, #FF8C00, #E8002A, #FFD700);
+    }
+    .sidebar-brand {
+      padding: 24px 20px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #2E8B22, #E05C00);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .brand-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .brand-name span { color: var(--purple2); }
+
+    .nav-section {
+      padding: 8px 12px;
+      flex: 1;
+    }
+    .nav-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 12px 8px 6px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: var(--navy3); color: var(--purple); }
+    .nav-item.active {
+      background: rgba(46,139,34,0.1);
+      color: #2E8B22;
+    }
+    .nav-item.active .ti { color: #2E8B22; }
+    .nav-item .ti { font-size: 18px; }
+    .nav-badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--coral);
+      color: #fff;
+      padding: 1px 7px;
+      border-radius: 20px;
+      line-height: 1.6;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid var(--border);
+    }
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .user-card:hover { background: var(--navy3); }
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-role { font-size: 11px; color: var(--muted); }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    /* TOPBAR */
+    .topbar {
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .topbar-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .topbar-sub { font-size: 13px; color: var(--muted); margin-left: 2px; }
+    .topbar-spacer { flex: 1; }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 14px;
+      width: 220px;
+      transition: border-color 0.15s;
+    }
+    .search-box:focus-within { border-color: var(--purple); }
+    .search-box input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      flex: 1;
+    }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-box .ti { color: var(--muted); font-size: 16px; }    .topbar-btn {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .topbar-btn:hover { background: var(--navy3); color: var(--purple); }
+    .topbar-btn .ti { font-size: 18px; }
+    .notif-dot {
+      position: absolute;
+      top: 6px; right: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+      border: 2px solid var(--navy2);
+    }
+
+    /* CONTENT */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .content::-webkit-scrollbar { width: 5px; }
+    .content::-webkit-scrollbar-track { background: transparent; }
+    .content::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+    /* STAT CARDS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stat-card.c-purple::after { background: #2E8B22; }
+    .stat-card.c-coral::after  { background: #E8002A; }
+    .stat-card.c-yellow::after { background: #D97706; }
+    .stat-card.c-cyan::after   { background: #E05C00; }
+
+    .stat-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+    .stat-icon.purple { background: rgba(46,139,34,0.15);  color: #2E8B22; }
+    .stat-icon.coral  { background: rgba(232,0,42,0.15);   color: #E8002A; }
+    .stat-icon.yellow { background: rgba(217,119,6,0.15);  color: #D97706; }
+    .stat-icon.cyan   { background: rgba(224,92,0,0.15);   color: #E05C00; }
+
+    .stat-label { font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .stat-change.up   { background: rgba(16,217,140,0.15); color: var(--green); }
+    .stat-change.down { background: rgba(255,77,109,0.15); color: var(--coral); }
+
+    /* MAIN GRID */
+    .mid-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+    }
+
+    /* CHART CARD */
+    .chart-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .card-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .period-tabs { display: flex; gap: 4px; }
+    .period-tab {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .period-tab:hover { color: var(--white); }
+    .period-tab.active {
+      background: rgba(46,139,34,0.12);
+      color: #2E8B22;
+      border-color: rgba(46,139,34,0.25);
+    }
+    .chart-wrap { position: relative; height: 220px; }
+
+    /* ACTIVITY FEED */
+    .activity-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+    }
+    .activity-list { display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .act-icon {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .act-body { flex: 1; min-width: 0; }
+    .act-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .act-time { font-size: 11px; color: var(--muted); }
+
+    /* BOTTOM GRID */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* TABLE CARD */
+    .table-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .data-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 0 0 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--white);
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .ti { font-size: 15px; vertical-align: -2px; margin-right: 6px; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .status-pill.active  { background: rgba(16,217,140,0.15); color: var(--green); }
+    .status-pill.pending { background: rgba(255,190,11,0.15);  color: var(--yellow); }
+    .status-pill.paused  { background: rgba(148,163,184,0.15); color: var(--muted); }
+
+    /* PROGRESS CARD */
+    .progress-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .goal-item { margin-bottom: 18px; }
+    .goal-item:last-child { margin-bottom: 0; }
+    .goal-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
+    .goal-name { font-size: 13px; font-weight: 500; }
+    .goal-pct  { font-size: 13px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+    .progress-bar {
+      height: 7px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* COLOR CLASSES for goal fills */
+    .fill-purple { background: #2E8B22; }
+    .fill-coral  { background: #E8002A; }
+    .fill-yellow { background: #D97706; }
+    .fill-cyan   { background: #E05C00; }
+    .fill-green  { background: #2E8B22; }
+
+    /* QUICK ACTION BUTTONS */
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .qa-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+    .qa-btn .ti { font-size: 17px; }
+    .qa-btn.primary {
+      background: #2E8B22;
+      color: #fff;
+    }
+    .qa-btn.primary:hover { background: #256B1A; transform: translateY(-1px); }
+    .qa-btn.secondary {
+      background: #FFFFFF;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .qa-btn.secondary:hover { background: var(--navy3); }
+
+    /* SCROLLBAR */
+    .content::-webkit-scrollbar { width: 6px; }
+
+    @media (max-width: 1100px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .mid-grid   { grid-template-columns: 1fr; }
+      .bottom-grid { grid-template-columns: 1fr; }
+      .search-box { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    
+<div class="sidebar-brand" style="padding:16px 14px 12px;">
+  <svg width="190" height="60" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="35" cy="35" r="28" fill="none" stroke="#222" stroke-width="2"/>
+    <path d="M15 45 Q35 25 55 45" fill="none" stroke="#2E8B22" stroke-width="2"/>
+    <path d="M18 50 Q35 32 52 50" fill="none" stroke="#2E8B22" stroke-width="2"/>
+    <path d="M28 32 L35 25 L42 32 V42 H28 Z" fill="#2E8B22"/>
+    <circle cx="48" cy="18" r="4" fill="#FF9800"/>
+    <text x="75" y="32" font-family="Arial" font-size="20" font-weight="700" fill="#222">Farm</text>
+    <text x="75" y="55" font-family="Arial" font-size="20" font-weight="700" fill="#2E8B22">to Door</text>
+  </svg>
+</div>
+
+
+    <nav class="nav-section">
+      <div class="nav-label">Main</div>
+      <a href="#" class="nav-item active">
+        <i class="ti ti-layout-dashboard"></i> Overview
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-chart-bar"></i> Analytics
+        <span class="nav-badge">New</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-users"></i> Customers
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-shopping-cart"></i> Orders
+        <span class="nav-badge">5</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-plant-2"></i> Products
+      </a>
+
+      <div class="nav-label">Manage</div>
+      <a href="#" class="nav-item">
+        <i class="ti ti-truck-delivery"></i> Deliveries
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-file-invoice"></i> Reports
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ti ti-settings"></i> Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="avatar">DS</div>
+        <div class="user-info">
+          <div class="user-name">Dharanika Subramani</div>
+          <div class="user-role">Admin · Pro Plan</div>
+        </div>
+        <i class="ti ti-dots-vertical" style="color:var(--muted);font-size:16px"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div>
+        <div class="topbar-title">Good morning, Dharanika 👋</div>
+        <div class="topbar-sub">Farm to Door · Tuesday, 9 June 2026</div>
+      </div>
+      <div class="topbar-spacer"></div>
+      <div class="search-box">
+        <i class="ti ti-search"></i>
+        <input type="text" placeholder="Search anything…" />
+        <span style="font-size:11px;color:var(--muted);background:var(--navy);border:1px solid var(--border);padding:1px 6px;border-radius:5px;">⌘K</span>
+      </div>
+      <div class="topbar-btn">
+        <i class="ti ti-bell"></i>
+        <span class="notif-dot"></span>
+      </div>
+      <div class="topbar-btn">
+        <i class="ti ti-help"></i>
+      </div>
+      <div class="avatar" style="width:36px;height:36px;font-size:13px;cursor:pointer;flex-shrink:0">DS</div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- QUICK ACTIONS -->
+      <div class="quick-actions">
+        <button class="qa-btn primary"><i class="ti ti-plus"></i> Add Product</button>
+        <button class="qa-btn secondary"><i class="ti ti-truck-delivery"></i> Schedule Delivery</button>
+        <button class="qa-btn secondary"><i class="ti ti-file-export"></i> Export Report</button>
+        <button class="qa-btn secondary"><i class="ti ti-share"></i> Invite Team</button>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card c-purple">
+          <div class="stat-icon purple"><i class="ti ti-currency-rupee"></i></div>
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-value" id="val-rev">₹0</div>
+          <span class="stat-change up"><i class="ti ti-trending-up"></i> +18.4%</span>
+        </div>
+        <div class="stat-card c-coral">
+          <div class="stat-icon coral"><i class="ti ti-users"></i></div>
+          <div class="stat-label">Active Customers</div>
+          <div class="stat-value" id="val-users">0</div>
+          <span class="stat-change up"><i class="ti ti-trending-up"></i> +7.2%</span>
+        </div>
+        <div class="stat-card c-yellow">
+          <div class="stat-icon yellow"><i class="ti ti-truck-delivery"></i></div>
+          <div class="stat-label">Deliveries Today</div>
+          <div class="stat-value" id="val-orders">0</div>
+          <span class="stat-change down"><i class="ti ti-trending-down"></i> −2.1%</span>
+        </div>
+        <div class="stat-card c-cyan">
+          <div class="stat-icon cyan"><i class="ti ti-star"></i></div>
+          <div class="stat-label">Freshness Score</div>
+          <div class="stat-value" id="val-sat">0%</div>
+          <span class="stat-change up"><i class="ti ti-trending-up"></i> +0.3%</span>
+        </div>
+      </div>
+
+      <!-- MID GRID: Chart + Activity -->
+      <div class="mid-grid">
+        <!-- CHART -->
+        <div class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Revenue Overview</div>
+              <div class="card-sub">Monthly performance vs target</div>
+            </div>
+            <div class="period-tabs">
+              <span class="period-tab">Week</span>
+              <span class="period-tab active">Month</span>
+              <span class="period-tab">Year</span>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+
+        <!-- ACTIVITY -->
+        <div class="activity-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Recent Activity</div>
+              <div class="card-sub">Live updates</div>
+            </div>
+            <span style="font-size:11px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:4px;">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite"></span>
+              Live
+            </span>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(46,139,34,0.15);color:#2E8B22"><i class="ti ti-user-plus"></i></div>
+              <div class="act-body">
+                <div class="act-title">New customer registered</div>
+                <div class="act-time">priya@mail.com · 2 min ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(46,139,34,0.15);color:#2E8B22"><i class="ti ti-truck-delivery"></i></div>
+              <div class="act-body">
+                <div class="act-title">Delivery #4821 completed</div>
+                <div class="act-time">₹4,320 · 11 min ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(217,119,6,0.15);color:#D97706"><i class="ti ti-alert-circle"></i></div>
+              <div class="act-body">
+                <div class="act-title">Low stock — Tomatoes</div>
+                <div class="act-time">Farm #3 · 24 min ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(224,92,0,0.15);color:#E05C00"><i class="ti ti-plant-2"></i></div>
+              <div class="act-body">
+                <div class="act-title">Fresh harvest arrived</div>
+                <div class="act-time">Spinach 40kg · 1 hr ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(232,0,42,0.15);color:#E8002A"><i class="ti ti-x"></i></div>
+              <div class="act-body">
+                <div class="act-title">Order #4819 cancelled</div>
+                <div class="act-time">Refund issued · 2 hrs ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM GRID: Table + Goals -->
+      <div class="bottom-grid">
+        <!-- PROJECTS TABLE -->
+        <div class="table-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Active Deliveries</div>
+              <div class="card-sub">6 routes in progress</div>
+            </div>
+            <button class="qa-btn secondary" style="flex:initial;padding:6px 14px;font-size:12px;">View all</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Produce</th>
+                <th>Farm</th>
+                <th>Status</th>
+                <th>ETA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><i class="ti ti-plant-2" style="color:#2E8B22"></i>Tomatoes 30kg</td>
+                <td style="color:var(--muted)">Green Valley</td>
+                <td><span class="status-pill active">● Active</span></td>
+                <td style="color:var(--muted)">2:30 PM</td>
+              </tr>
+              <tr>
+                <td><i class="ti ti-plant-2" style="color:#E05C00"></i>Carrots 20kg</td>
+                <td style="color:var(--muted)">Sunrise Farm</td>
+                <td><span class="status-pill pending">● Pending</span></td>
+                <td style="color:var(--muted)">4:00 PM</td>
+              </tr>
+              <tr>
+                <td><i class="ti ti-plant-2" style="color:#E8002A"></i>Strawberry 10kg</td>
+                <td style="color:var(--muted)">Hill Top Farm</td>
+                <td><span class="status-pill active">● Active</span></td>
+                <td style="color:var(--muted)">5:15 PM</td>
+              </tr>
+              <tr>
+                <td><i class="ti ti-plant-2" style="color:#D97706"></i>Mangoes 25kg</td>
+                <td style="color:var(--muted)">Orchard King</td>
+                <td><span class="status-pill paused">● Paused</span></td>
+                <td style="color:var(--muted)">TBD</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="progress-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Q2 Goals</div>
+              <div class="card-sub">Jun 2026 targets</div>
+            </div>
+            <span style="font-size:12px;color:var(--muted)">22 days left</span>
+          </div>
+          <div class="goal-item">
+            <div class="goal-row">
+              <span class="goal-name">Revenue Target</span>
+              <span class="goal-pct" style="color:#2E8B22">82%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-purple" style="width:0%" data-w="82"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-row">
+              <span class="goal-name">New Customers</span>
+              <span class="goal-pct" style="color:#E8002A">67%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-coral" style="width:0%" data-w="67"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-row">
+              <span class="goal-name">Farms Onboarded</span>
+              <span class="goal-pct" style="color:#D97706">100%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-yellow" style="width:0%" data-w="100"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-row">
+              <span class="goal-name">Delivery SLA</span>
+              <span class="goal-pct" style="color:#E05C00">91%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-cyan" style="width:0%" data-w="91"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-row">
+              <span class="goal-name">Customer NPS</span>
+              <span class="goal-pct" style="color:#2E8B22">74%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-green" style="width:0%" data-w="74"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .content -->
+  </main>
+</div><!-- end .app -->
+
+<style>
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.5; transform:scale(1.3); }
+}
+</style>
+
+<script>
+/* ── COUNTER ANIMATION ── */
+function animateCount(el, target, prefix, suffix, duration) {
+  const start = performance.now();
+  const step = (now) => {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = Math.round(ease * target);
+    el.textContent = prefix + val.toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+animateCount(document.getElementById('val-rev'),    148320, '₹', '', 1600);
+animateCount(document.getElementById('val-users'),   24709, '',  '', 1400);
+animateCount(document.getElementById('val-orders'),   8931, '',  '', 1200);
+animateCount(document.getElementById('val-sat'),        96, '',  '%', 1000);
+
+/* ── PROGRESS BARS ── */
+setTimeout(() => {
+  document.querySelectorAll('.progress-fill[data-w]').forEach(el => {
+    el.style.width = el.dataset.w + '%';
+  });
+}, 200);
+
+/* ── PERIOD TABS ── */
+document.querySelectorAll('.period-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    tab.closest('.period-tabs').querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+/* ── CHART ── */
+window.addEventListener('load', () => {
+  const ctx = document.getElementById('revenueChart').getContext('2d');
+
+  const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+  const revenue = [82000, 95000, 110000, 98000, 125000, 148000];
+  const target  = [90000, 90000, 105000, 110000, 115000, 140000];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [
+        {
+          label: 'Revenue',
+          data: revenue,
+          backgroundColor: 'rgba(46,139,34,0.75)',
+          borderRadius: 8,
+          borderSkipped: false,
+          barThickness: 28,
+        },
+        {
+          label: 'Target',
+          data: target,
+          type: 'line',
+          borderColor: '#E05C00',
+          borderWidth: 2,
+          borderDash: [5, 4],
+          pointBackgroundColor: '#E05C00',
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          fill: false,
+          tension: 0.4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#64748B',
+            font: { size: 12, family: 'Inter' },
+            boxWidth: 12,
+            boxHeight: 12,
+            borderRadius: 3,
+            useBorderRadius: true,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#1E293B',
+          borderColor: 'rgba(0,0,0,0.1)',
+          borderWidth: 1,
+          titleColor: '#FFFFFF',
+          bodyColor: '#94A3B8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' $' + ctx.parsed.y.toLocaleString()
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#64748B', font: { size: 12 } },
+          border: { display: false }
+        },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: {
+            color: '#64748B',
+            font: { size: 11 },
+            callback: v => '$' + (v/1000).toFixed(0) + 'k'
+          },
+          border: { display: false }
+        }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

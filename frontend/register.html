@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farm to Door — Create Account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Satisfy&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F5FBF0;
+      --white:    #FFFFFF;
+      --green:    #2E8B22;
+      --green2:   #256B1A;
+      --green-lt: #E8F5E0;
+      --orange:   #E05C00;
+      --red:      #E8002A;
+      --yellow:   #D97706;
+      --text:     #1A2E0A;
+      --muted:    #64748B;
+      --border:   rgba(0,0,0,0.08);
+      --shadow:   0 4px 24px rgba(46,139,34,0.10);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    /* ════════════════════════════════
+       LEFT PANEL — exactly matches login
+    ════════════════════════════════ */
+    .left-panel {
+      background: linear-gradient(145deg, #1A4D12 0%, #2E8B22 45%, #5DB845 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      top: -100px; left: -120px;
+    }
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      bottom: -80px; right: -80px;
+    }
+    .left-top-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #FFD700, #FF8C00, #E8002A, #FFD700);
+    }
+    .left-logo { margin-bottom: 28px; z-index: 1; }
+
+    /* Step tracker — replaces illustration */
+    .step-tracker {
+      width: 100%;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1;
+      margin-bottom: 28px;
+    }
+    .tracker-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 13px 16px;
+      transition: all 0.35s;
+      backdrop-filter: blur(6px);
+    }
+    .tracker-item.t-active {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.40);
+      transform: translateX(7px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .tracker-item.t-done {
+      background: rgba(255,215,0,0.13);
+      border-color: rgba(255,215,0,0.30);
+    }
+    .t-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .tracker-item.t-active .t-num,
+    .tracker-item.t-done   .t-num { background: #FFD700; color: #1A2E0A; }
+    .t-body { flex: 1; }
+    .t-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+    .t-desc  { font-size: 11px; color: rgba(255,255,255,0.60); }
+    .t-check { font-size: 17px; color: #FFD700; display: none; }
+    .tracker-item.t-done .t-check { display: block; }
+
+    /* Stats row — same as login */
+    .left-stats {
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+    }
+    .left-stat {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      padding: 14px 20px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      flex: 1;
+    }
+    .left-stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px; font-weight: 700; color: #fff;
+    }
+    .left-stat-label {
+      font-size: 11px; color: rgba(255,255,255,0.7);
+      margin-top: 3px; letter-spacing: 0.4px;
+    }
+
+    /* Tagline — same as login */
+    .left-tagline {
+      margin-top: 24px;
+      text-align: center;
+      z-index: 1;
+    }
+    .left-tagline h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700; color: #fff; line-height: 1.3;
+    }
+    .left-tagline p {
+      font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px;
+    }
+
+    /* Floating veggie badges — same as login */
+    .veg-badge {
+      position: absolute;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(6px);
+      border-radius: 30px;
+      padding: 6px 14px;
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; font-weight: 600; color: #fff;
+      z-index: 2;
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+    .veg-badge:nth-child(1) { top: 9%;  left: 6%;  animation-delay: 0s; }
+    .veg-badge:nth-child(2) { top: 17%; right: 4%; animation-delay: 1.2s; }
+    .veg-badge:nth-child(3) { bottom: 12%; left: 4%;  animation-delay: 0.6s; }
+    .veg-badge:nth-child(4) { bottom: 6%;  right: 6%; animation-delay: 1.8s; }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    /* ════════════════════════════════
+       RIGHT PANEL
+    ════════════════════════════════ */
+    .right-panel {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 36px;
+      background: var(--bg);
+      overflow-y: auto;
+    }
+    .right-panel::-webkit-scrollbar { width: 5px; }
+    .right-panel::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+    .form-wrap { width: 100%; max-width: 420px; }
+
+    /* ── Progress bar ── */
+    .prog-wrap { margin-bottom: 26px; }
+    .prog-meta {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 8px;
+    }
+    .prog-label { font-size: 12px; font-weight: 600; color: var(--green); letter-spacing: .3px; }
+    .prog-pct   { font-size: 12px; color: var(--muted); }
+    .prog-track { height: 7px; background: #E2E8F0; border-radius: 4px; overflow: hidden; }
+    .prog-fill  {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--green), #5DB845);
+      transition: width .5s cubic-bezier(.4,0,.2,1);
+    }
+    /* Dots */
+    .dots-row { display: flex; align-items: center; margin-top: 10px; }
+    .sdot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #E2E8F0; border: 2px solid #E2E8F0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      transition: all 0.3s; flex-shrink: 0;
+    }
+    .sdot.active { background: var(--green); border-color: var(--green); color: #fff; box-shadow: 0 0 0 4px rgba(46,139,34,0.15); }
+    .sdot.done   { background: var(--green); border-color: var(--green); color: #fff; }
+    .sline { flex: 1; height: 2px; background: #E2E8F0; transition: background 0.4s; }
+    .sline.done { background: var(--green); }
+
+    /* ── Step panels ── */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; animation: slideIn .28s ease; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(18px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── Form header — identical to login ── */
+    .form-header { margin-bottom: 24px; }
+    .form-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--green);
+      background: var(--green-lt); border: 1px solid rgba(46,139,34,0.2);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .form-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700; color: var(--text);
+      letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 7px;
+    }
+    .form-title span { color: var(--green); }
+    .form-sub { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Social buttons — identical to login ── */
+    .social-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-bottom: 20px;
+    }
+    .social-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px; border-radius: 12px;
+      border: 1.5px solid var(--border); background: var(--white);
+      font-size: 13px; font-weight: 600; color: var(--text);
+      cursor: pointer; transition: all 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .social-btn:hover { border-color: var(--green); background: var(--green-lt); color: var(--green); }
+    .social-btn .ti { font-size: 18px; }
+
+    /* Divider — identical to login */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; color: var(--muted); font-size: 12px;
+    }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── Role cards ── */
+    .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 6px; }
+    .role-card {
+      border: 2px solid var(--border); border-radius: 14px;
+      padding: 18px 14px; text-align: center; cursor: pointer;
+      background: var(--white); transition: all 0.2s;
+      position: relative; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .role-card:hover { border-color: var(--green); background: var(--green-lt); }
+    .role-card.picked {
+      border-color: var(--green); background: var(--green-lt);
+      box-shadow: 0 0 0 3px rgba(46,139,34,0.12);
+    }
+    .rc-tick {
+      position: absolute; top: 8px; right: 8px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--green); color: #fff; font-size: 11px;
+      display: none; align-items: center; justify-content: center;
+    }
+    .role-card.picked .rc-tick { display: flex; }
+    .role-emoji { font-size: 30px; margin-bottom: 7px; }
+    .role-name  { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .role-sub   { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+
+    /* ── Form fields — identical to login ── */
+    .form-group { margin-bottom: 16px; }
+    .form-group.half { display: inline-block; width: calc(50% - 7px); vertical-align: top; }
+    .form-group.half:nth-child(odd) { margin-right: 14px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid .form-group { margin-bottom: 0; }
+    .span2 { grid-column: 1 / -1; }
+
+    .form-label {
+      display: block; font-size: 12.5px; font-weight: 600;
+      color: var(--text); margin-bottom: 7px;
+    }
+    .input-wrap { position: relative; }
+    .input-icon {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); font-size: 17px;
+      color: var(--muted); pointer-events: none; transition: color 0.15s;
+    }
+    .input-wrap input,
+    .input-wrap select,
+    .input-wrap textarea {
+      width: 100%;
+      padding: 11px 14px 11px 42px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+      font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .input-wrap textarea { height: 80px; padding-top: 12px; resize: none; }
+    .input-wrap select   { cursor: pointer; }
+    .input-wrap input::placeholder,
+    .input-wrap textarea::placeholder { color: #A0AEC0; }
+    .input-wrap input:focus,
+    .input-wrap select:focus,
+    .input-wrap textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(46,139,34,0.10);
+    }
+    .input-wrap:focus-within .input-icon { color: var(--green); }
+    .input-wrap.valid   input,
+    .input-wrap.valid   select { border-color: var(--green); }
+    .input-wrap.valid   .input-icon { color: var(--green); }
+    .input-wrap.invalid input,
+    .input-wrap.invalid select { border-color: var(--red); }
+    .input-wrap.invalid .input-icon { color: var(--red); }
+
+    /* pw eye toggle — identical to login */
+    .pw-toggle {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%); font-size: 17px;
+      color: var(--muted); cursor: pointer; transition: color .15s;
+    }
+    .pw-toggle:hover { color: var(--green); }
+
+    /* field error — identical to login */
+    .field-error {
+      font-size: 11.5px; color: var(--red);
+      margin-top: 5px; display: none;
+      align-items: center; gap: 4px;
+    }
+    .field-error.show { display: flex; }
+
+    /* ── Password strength ── */
+    .pw-strength { margin-top: 8px; }
+    .pw-bars { display: flex; gap: 4px; margin-bottom: 4px; }
+    .pw-bar {
+      flex: 1; height: 5px; border-radius: 3px;
+      background: #E2E8F0; transition: background .3s;
+    }
+    .pw-bar.weak   { background: var(--red); }
+    .pw-bar.fair   { background: var(--yellow); }
+    .pw-bar.strong { background: var(--green); }
+    .pw-hint { font-size: 11px; color: var(--muted); }
+
+    /* ── Password requirements ── */
+    .req-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .req-box-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .req-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--muted);
+      margin-bottom: 7px;
+    }
+    .req-item:last-child { margin-bottom: 0; }
+    .req-item .ti { font-size: 14px; color: #CBD5E1; transition: color .2s; }
+    .req-item.met .ti { color: var(--green); }
+    .req-item.met     { color: var(--green); }
+
+    /* ── Checkboxes ── */
+    .check-row {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .check-row input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--green); cursor: pointer;
+      margin-top: 2px; flex-shrink: 0;
+    }
+    .check-row label { font-size: 12.5px; color: var(--muted); cursor: pointer; line-height: 1.5; }
+    .check-row label a { color: var(--green); font-weight: 600; text-decoration: none; }
+    .check-row label a:hover { text-decoration: underline; }
+
+    /* ── Buttons ── */
+    .btn-row { display: flex; gap: 10px; margin-top: 6px; }
+    .btn-back {
+      padding: 12px 20px; border-radius: 12px;
+      border: 1.5px solid var(--border); background: var(--white);
+      color: var(--text); font-size: 13px; font-weight: 600;
+      font-family: 'Inter', sans-serif; cursor: pointer; transition: all .15s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .btn-back:hover { background: var(--green-lt); border-color: var(--green); color: var(--green); }
+
+    /* Submit / next button — identical to login's submit-btn */
+    .submit-btn {
+      flex: 1; padding: 13px;
+      border-radius: 12px; border: none;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      color: #fff; font-size: 15px; font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 4px 16px rgba(46,139,34,0.35);
+      position: relative; overflow: hidden;
+      letter-spacing: .2px;
+    }
+    .submit-btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0; transition: opacity .2s;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,139,34,0.40); }
+    .submit-btn:hover::after { opacity: 1; }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn .ti { font-size: 18px; }
+
+    /* Spinner — identical to login */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.4);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .7s linear infinite; display: none;
+    }
+
+    /* Sign-in row — mirrors login's signup-row */
+    .signin-row {
+      text-align: center; margin-top: 18px;
+      font-size: 13px; color: var(--muted);
+    }
+    .signin-row a { color: var(--green); font-weight: 600; text-decoration: none; }
+    .signin-row a:hover { text-decoration: underline; }
+
+    /* Trust row — identical to login */
+    .trust-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 18px; margin-top: 20px; padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+    .trust-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .trust-item .ti { font-size: 14px; color: var(--green); }
+
+    /* ── SUCCESS ── */
+    .success-check {
+      display: none; flex-direction: column;
+      align-items: center; text-align: center;
+      padding: 30px 0 10px;
+    }
+    .check-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; color: #fff;
+      box-shadow: 0 8px 28px rgba(46,139,34,0.35);
+      margin-bottom: 18px;
+      animation: popIn .45s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .success-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .success-sub { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 22px; }
+    .success-card {
+      width: 100%; background: var(--white);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px 20px; margin-bottom: 20px; text-align: left;
+    }
+    .sc-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 0; border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .sc-row:last-child { border-bottom: none; }
+    .sc-row .ti { font-size: 16px; color: var(--green); }
+    .sc-lbl { color: var(--muted); flex: 0 0 90px; font-size: 12px; }
+    .sc-val { font-weight: 600; color: var(--text); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page { grid-template-columns: 1fr; }
+      .left-panel { display: none; }
+      .right-panel { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══════════ LEFT PANEL ═══════════ -->
+  <div class="left-panel">
+    <div class="left-top-bar"></div>
+
+    <!-- Floating badges — same emojis/style as login -->
+    <div class="veg-badge">🍅 Tomatoes · Fresh</div>
+    <div class="veg-badge">🥕 Carrots · Organic</div>
+    <div class="veg-badge">🥬 Spinach · Local</div>
+    <div class="veg-badge">🍓 Strawberry · Premium</div>
+
+    <!-- ★ EXACT SAME LOGO as login.html ★ -->
+    <div class="left-logo">
+      <svg width="240" height="90" viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="45" r="32" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+        <path d="M22 55 Q45 30 68 55" fill="none" stroke="#A5D6A7" stroke-width="3"/>
+        <path d="M26 62 Q45 40 64 62" fill="none" stroke="#A5D6A7" stroke-width="3"/>
+        <path d="M38 40 L45 32 L52 40 V54 H38 Z" fill="#FFFFFF"/>
+        <circle cx="62" cy="25" r="5" fill="#FFD54F"/>
+        <text x="90" y="42" font-size="26" font-weight="700" fill="#FFFFFF">Farm</text>
+        <text x="90" y="68" font-size="26" font-weight="700" fill="#A5D6A7">to Door</text>
+      </svg>
+    </div>
+
+    <!-- Step tracker (replaces illustration for register page) -->
+    <div class="step-tracker">
+      <div class="tracker-item t-active" id="ti1">
+        <div class="t-num">1</div>
+        <div class="t-body">
+          <div class="t-title">Choose Your Role</div>
+          <div class="t-desc">Farmer or Consumer</div>
+        </div>
+        <i class="ti ti-check t-check"></i>
+      </div>
+      <div class="tracker-item" id="ti2">
+        <div class="t-num">2</div>
+        <div class="t-body">
+          <div class="t-title">Personal Details</div>
+          <div class="t-desc">Name, email & phone</div>
+        </div>
+        <i class="ti ti-check t-check"></i>
+      </div>
+      <div class="tracker-item" id="ti3">
+        <div class="t-num">3</div>
+        <div class="t-body">
+          <div class="t-title">Location & Address</div>
+          <div class="t-desc">City, state & PIN code</div>
+        </div>
+        <i class="ti ti-check t-check"></i>
+      </div>
+      <div class="tracker-item" id="ti4">
+        <div class="t-num">4</div>
+        <div class="t-body">
+          <div class="t-title">Set Password</div>
+          <div class="t-desc">Secure your account</div>
+        </div>
+        <i class="ti ti-check t-check"></i>
+      </div>
+    </div>
+
+    <!-- Stats — identical to login -->
+    <div class="left-stats">
+      <div class="left-stat">
+        <div class="left-stat-value">1,200+</div>
+        <div class="left-stat-label">Farmers</div>
+      </div>
+      <div class="left-stat">
+        <div class="left-stat-value">24,700</div>
+        <div class="left-stat-label">Customers</div>
+      </div>
+      <div class="left-stat">
+        <div class="left-stat-value">98%</div>
+        <div class="left-stat-label">Freshness</div>
+      </div>
+    </div>
+
+    <!-- Tagline — identical to login -->
+    <div class="left-tagline">
+      <h2>From the Farm,<br>Straight to Your Door 🌿</h2>
+      <p>Connecting farmers and families — fresh, local, direct.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ RIGHT PANEL ═══════════ -->
+  <div class="right-panel">
+    <div class="form-wrap">
+
+      <!-- Progress bar -->
+      <div class="prog-wrap">
+        <div class="prog-meta">
+          <span class="prog-label" id="progLabel">Step 1 of 4 — Choose Role</span>
+          <span class="prog-pct"   id="progPct">25%</span>
+        </div>
+        <div class="prog-track">
+          <div class="prog-fill" id="progFill" style="width:25%"></div>
+        </div>
+        <div class="dots-row">
+          <div class="sdot active" id="d1">1</div>
+          <div class="sline"       id="l1"></div>
+          <div class="sdot"        id="d2">2</div>
+          <div class="sline"       id="l2"></div>
+          <div class="sdot"        id="d3">3</div>
+          <div class="sline"       id="l3"></div>
+          <div class="sdot"        id="d4">4</div>
+        </div>
+      </div>
+
+      <!-- SUCCESS state -->
+      <div class="success-check" id="successState">
+        <div class="check-circle"><i class="ti ti-check"></i></div>
+        <div class="success-title">Welcome to Farm to Door! 🎉</div>
+        <p class="success-sub">Your account has been created successfully.<br>Get ready for the freshest produce, straight to your door.</p>
+        <div class="success-card" id="successCard"></div>
+        <button class="submit-btn" onclick="window.location.href='login.html'" style="margin-top:0">
+          <i class="ti ti-login"></i> Sign In to Your Account
+        </button>
+        <div class="signin-row" style="margin-top:12px">
+          <a href="index.html">Skip to Dashboard →</a>
+        </div>
+      </div>
+
+      <!-- ━━━━ STEP 1 — Role ━━━━ -->
+      <div class="step-panel active" id="step1">
+        <div class="form-header">
+          <div class="form-eyebrow"><i class="ti ti-leaf"></i> Create Account</div>
+          <h1 class="form-title">Who are <span>you?</span> 👋</h1>
+          <p class="form-sub">Choose your role — we'll personalise your experience just for you.</p>
+        </div>
+
+        <!-- Social — identical to login -->
+        <div class="social-row">
+          <button class="social-btn" onclick="handleSocial(this)">
+            <svg width="18" height="18" viewBox="0 0 48 48">
+              <path fill="#EA4335" d="M24 9.5c3.3 0 5.9 1.1 7.8 2.9l5.8-5.8C34.1 3.5 29.4 1.5 24 1.5 14.9 1.5 7.2 7.1 3.9 14.9l6.8 5.3C12.4 13.9 17.7 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.5 24c0-1.6-.1-3.2-.4-4.7H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8C43.5 37 46.5 31 46.5 24z"/>
+              <path fill="#FBBC05" d="M10.7 28.8c-.7-2-1.1-4.1-1.1-6.3s.4-4.3 1.1-6.3L3.9 10.9C2.1 14.4 1 18.1 1 22.5s1.1 8.1 2.9 11.6l6.8-5.3z"/>
+              <path fill="#34A853" d="M24 46.5c5.4 0 10-1.8 13.4-4.8l-7.5-5.8c-1.9 1.3-4.3 2.1-5.9 2.1-6.3 0-11.6-4.4-13.3-10.2l-6.8 5.3C7.2 40.9 14.9 46.5 24 46.5z"/>
+            </svg>
+            Sign up with Google
+          </button>
+          <button class="social-btn" onclick="handleSocial(this)">
+            <i class="ti ti-brand-facebook" style="color:#1877F2;font-size:20px"></i>
+            Sign up with Facebook
+          </button>
+        </div>
+        <div class="divider">or continue with email</div>
+
+        <div class="role-grid">
+          <div class="role-card" id="rc-farmer" onclick="pickRole('farmer')">
+            <div class="rc-tick"><i class="ti ti-check" style="font-size:10px"></i></div>
+            <div class="role-emoji">🧑‍🌾</div>
+            <div class="role-name">Farmer</div>
+            <div class="role-sub">Sell your fresh produce directly to customers</div>
+          </div>
+          <div class="role-card" id="rc-consumer" onclick="pickRole('consumer')">
+            <div class="rc-tick"><i class="ti ti-check" style="font-size:10px"></i></div>
+            <div class="role-emoji">🛒</div>
+            <div class="role-name">Consumer</div>
+            <div class="role-sub">Order fresh vegetables & fruits to your door</div>
+          </div>
+        </div>
+        <div class="field-error show" id="errRole" style="margin:10px 0 14px">
+          <i class="ti ti-alert-circle" style="font-size:13px"></i>&nbsp; Please select a role to continue
+        </div>
+
+        <div class="btn-row">
+          <button class="submit-btn" onclick="goNext(1)">
+            Continue <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+        <div class="signin-row">
+          Already have an account? <a href="login.html">Sign in →</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><i class="ti ti-shield-check"></i> SSL Secured</div>
+          <div class="trust-item"><i class="ti ti-lock"></i> Private & Safe</div>
+          <div class="trust-item"><i class="ti ti-leaf"></i> 100% Organic</div>
+        </div>
+      </div>
+
+      <!-- ━━━━ STEP 2 — Personal Details ━━━━ -->
+      <div class="step-panel" id="step2">
+        <div class="form-header">
+          <div class="form-eyebrow"><i class="ti ti-user"></i> Personal Info</div>
+          <h1 class="form-title">Tell us about <span>yourself</span></h1>
+          <p class="form-sub">Your basic details to set up your profile.</p>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <div class="input-wrap" id="w-fname">
+              <i class="ti ti-user input-icon"></i>
+              <input type="text" id="fname" placeholder="Ravi" oninput="vNotEmpty('fname','w-fname','e-fname')"/>
+            </div>
+            <div class="field-error" id="e-fname"><i class="ti ti-alert-circle" style="font-size:12px"></i> Required</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <div class="input-wrap" id="w-lname">
+              <i class="ti ti-user input-icon"></i>
+              <input type="text" id="lname" placeholder="Kumar" oninput="vNotEmpty('lname','w-lname','e-lname')"/>
+            </div>
+            <div class="field-error" id="e-lname"><i class="ti ti-alert-circle" style="font-size:12px"></i> Required</div>
+          </div>
+          <div class="form-group span2">
+            <label class="form-label">Email Address *</label>
+            <div class="input-wrap" id="w-email">
+              <i class="ti ti-mail input-icon"></i>
+              <input type="email" id="email" placeholder="ravi@example.com" oninput="vEmail()"/>
+            </div>
+            <div class="field-error" id="e-email"><i class="ti ti-alert-circle" style="font-size:12px"></i> Please enter a valid email address</div>
+          </div>
+          <div class="form-group span2">
+            <label class="form-label">Phone Number *</label>
+            <div class="input-wrap" id="w-phone">
+              <i class="ti ti-phone input-icon"></i>
+              <input type="tel" id="phone" placeholder="+91 98765 43210" oninput="vPhone()"/>
+            </div>
+            <div class="field-error" id="e-phone"><i class="ti ti-alert-circle" style="font-size:12px"></i> Enter a valid 10-digit phone number</div>
+          </div>
+          <div class="form-group span2">
+            <label class="form-label">Date of Birth <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+            <div class="input-wrap">
+              <i class="ti ti-calendar input-icon"></i>
+              <input type="date" id="dob"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top:8px">
+          <button class="btn-back" onclick="goBack(2)"><i class="ti ti-arrow-left"></i> Back</button>
+          <button class="submit-btn" onclick="goNext(2)">Continue <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- ━━━━ STEP 3 — Location ━━━━ -->
+      <div class="step-panel" id="step3">
+        <div class="form-header">
+          <div class="form-eyebrow"><i class="ti ti-map-pin"></i> Location</div>
+          <h1 class="form-title">Where are <span>you based?</span></h1>
+          <p class="form-sub">We use this to match you with nearby farms and delivery zones.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Street Address *</label>
+          <div class="input-wrap" id="w-addr">
+            <i class="ti ti-home input-icon"></i>
+            <input type="text" id="addr" placeholder="123, Gandhi Nagar" oninput="vNotEmpty('addr','w-addr','e-addr')"/>
+          </div>
+          <div class="field-error" id="e-addr"><i class="ti ti-alert-circle" style="font-size:12px"></i> Required</div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">City *</label>
+            <div class="input-wrap" id="w-city">
+              <i class="ti ti-building input-icon"></i>
+              <input type="text" id="city" placeholder="Tiruppur" oninput="vNotEmpty('city','w-city','e-city')"/>
+            </div>
+            <div class="field-error" id="e-city"><i class="ti ti-alert-circle" style="font-size:12px"></i> Required</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State *</label>
+            <div class="input-wrap" id="w-state">
+              <i class="ti ti-map input-icon"></i>
+              <input type="text" id="state" placeholder="Tamil Nadu" oninput="vNotEmpty('state','w-state','e-state')"/>
+            </div>
+            <div class="field-error" id="e-state"><i class="ti ti-alert-circle" style="font-size:12px"></i> Required</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">PIN Code *</label>
+            <div class="input-wrap" id="w-pin">
+              <i class="ti ti-hash input-icon"></i>
+              <input type="text" id="pin" placeholder="641602" maxlength="6" oninput="vPin()"/>
+            </div>
+            <div class="field-error" id="e-pin"><i class="ti ti-alert-circle" style="font-size:12px"></i> Enter a valid 6-digit PIN</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Country</label>
+            <div class="input-wrap">
+              <i class="ti ti-world input-icon"></i>
+              <select id="country">
+                <option value="IN" selected>🇮🇳 India</option>
+                <option value="US">🇺🇸 United States</option>
+                <option value="UK">🇬🇧 United Kingdom</option>
+                <option value="AU">🇦🇺 Australia</option>
+                <option value="SG">🇸🇬 Singapore</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group span2">
+            <label class="form-label">Delivery Notes <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+            <div class="input-wrap">
+              <i class="ti ti-notes input-icon" style="top:16px;transform:none"></i>
+              <textarea id="notes" placeholder="E.g. Near the water tower, ring bell on arrival…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top:4px">
+          <button class="btn-back" onclick="goBack(3)"><i class="ti ti-arrow-left"></i> Back</button>
+          <button class="submit-btn" onclick="goNext(3)">Continue <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- ━━━━ STEP 4 — Password ━━━━ -->
+      <div class="step-panel" id="step4">
+        <div class="form-header">
+          <div class="form-eyebrow"><i class="ti ti-lock"></i> Security</div>
+          <h1 class="form-title">Secure your <span>account</span></h1>
+          <p class="form-sub">Create a strong password to protect your Farm to Door account.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Create Password *</label>
+          <div class="input-wrap" id="w-pw1">
+            <i class="ti ti-lock input-icon"></i>
+            <input type="password" id="pw1" placeholder="Minimum 8 characters" oninput="evalPw()"/>
+            <i class="ti ti-eye pw-toggle" id="eye1" onclick="togglePw('pw1','eye1')"></i>
+          </div>
+          <div class="pw-strength" id="pwStrength" style="display:none">
+            <div class="pw-bars">
+              <div class="pw-bar" id="pb1"></div>
+              <div class="pw-bar" id="pb2"></div>
+              <div class="pw-bar" id="pb3"></div>
+              <div class="pw-bar" id="pb4"></div>
+            </div>
+            <span class="pw-hint" id="pwHint">Weak</span>
+          </div>
+          <div class="field-error" id="e-pw1"><i class="ti ti-alert-circle" style="font-size:12px"></i> At least 8 characters required</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm Password *</label>
+          <div class="input-wrap" id="w-pw2">
+            <i class="ti ti-lock-check input-icon"></i>
+            <input type="password" id="pw2" placeholder="Repeat your password" oninput="vConfirm()"/>
+            <i class="ti ti-eye pw-toggle" id="eye2" onclick="togglePw('pw2','eye2')"></i>
+          </div>
+          <div class="field-error" id="e-pw2"><i class="ti ti-alert-circle" style="font-size:12px"></i> Passwords do not match</div>
+        </div>
+
+        <!-- Requirements checklist -->
+        <div class="req-box">
+          <div class="req-box-title">Password requirements</div>
+          <div class="req-item" id="req-len"><i class="ti ti-circle"></i> At least 8 characters</div>
+          <div class="req-item" id="req-up" ><i class="ti ti-circle"></i> One uppercase letter (A–Z)</div>
+          <div class="req-item" id="req-num"><i class="ti ti-circle"></i> One number (0–9)</div>
+          <div class="req-item" id="req-sym"><i class="ti ti-circle"></i> One special character (!@#$…)</div>
+        </div>
+
+        <div class="check-row">
+          <input type="checkbox" id="terms"/>
+          <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> of Farm to Door</label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="promo" checked/>
+          <label for="promo">Send me updates on fresh produce, seasonal offers & deals 🌿</label>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goBack(4)"><i class="ti ti-arrow-left"></i> Back</button>
+          <button class="submit-btn" id="submitBtn" onclick="submitForm()">
+            <span id="submitTxt"><i class="ti ti-rocket"></i> Create Account</span>
+            <div class="spinner" id="submitSpin"></div>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- end .form-wrap -->
+  </div><!-- end .right-panel -->
+
+</div><!-- end .page -->
+
+<script>
+  let selectedRole = null, currentStep = 1;
+
+  /* ── Role selection ── */
+  function pickRole(r) {
+    selectedRole = r;
+    ['farmer','consumer'].forEach(x => document.getElementById('rc-'+x).classList.remove('picked'));
+    document.getElementById('rc-'+r).classList.add('picked');
+    document.getElementById('errRole').classList.remove('show');
+  }
+
+  /* ── Toggle password ── */
+  function togglePw(inputId, eyeId) {
+    const el = document.getElementById(inputId);
+    const ic = document.getElementById(eyeId);
+    if (el.type === 'password') { el.type = 'text';     ic.classList.replace('ti-eye','ti-eye-off'); }
+    else                        { el.type = 'password'; ic.classList.replace('ti-eye-off','ti-eye'); }
+  }
+
+  /* ── Helpers ── */
+  function setWrap(id, ok, bad) {
+    const el = document.getElementById(id);
+    el.classList.toggle('valid',   !!ok);
+    el.classList.toggle('invalid', !!bad);
+  }
+
+  function vNotEmpty(fid, wid, eid) {
+    const v  = document.getElementById(fid).value.trim();
+    const ok = v.length > 0;
+    setWrap(wid, ok, !ok);
+    document.getElementById(eid).classList.toggle('show', !ok);
+    return ok;
+  }
+
+  function vEmail() {
+    const v  = document.getElementById('email').value;
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    setWrap('w-email', ok && v.length > 0, !ok && v.length > 0);
+    document.getElementById('e-email').classList.toggle('show', !ok && v.length > 0);
+    return ok;
+  }
+
+  function vPhone() {
+    const v  = document.getElementById('phone').value.replace(/\D/g,'');
+    const ok = v.length >= 10;
+    setWrap('w-phone', ok, !ok && v.length > 0);
+    document.getElementById('e-phone').classList.toggle('show', !ok && v.length > 0);
+    return ok;
+  }
+
+  function vPin() {
+    const v  = document.getElementById('pin').value;
+    const ok = /^\d{6}$/.test(v);
+    setWrap('w-pin', ok, !ok && v.length > 0);
+    document.getElementById('e-pin').classList.toggle('show', !ok && v.length > 0);
+    return ok;
+  }
+
+  /* ── Password strength ── */
+  function evalPw() {
+    const pw  = document.getElementById('pw1').value;
+    const str = document.getElementById('pwStrength');
+    str.style.display = pw.length > 0 ? 'block' : 'none';
+
+    const checks = [pw.length >= 8, /[A-Z]/.test(pw), /[0-9]/.test(pw), /[^A-Za-z0-9]/.test(pw)];
+    const score  = checks.filter(Boolean).length;
+
+    // Requirement items
+    ['req-len','req-up','req-num','req-sym'].forEach((id, i) => {
+      const el   = document.getElementById(id);
+      const icon = el.querySelector('.ti');
+      el.classList.toggle('met', checks[i]);
+      icon.className = checks[i] ? 'ti ti-circle-check' : 'ti ti-circle';
+    });
+
+    // Strength bars
+    const cls = score <= 1 ? 'weak' : score <= 3 ? 'fair' : 'strong';
+    ['pb1','pb2','pb3','pb4'].forEach((b, i) => {
+      const el = document.getElementById(b);
+      el.className = 'pw-bar';
+      if (i < score) el.classList.add(cls);
+    });
+    const hint   = document.getElementById('pwHint');
+    const labels = ['','Weak','Fair','Good','Strong 💪'];
+    const colors = ['','#E8002A','#D97706','#D97706','#2E8B22'];
+    hint.textContent = labels[score] || 'Weak';
+    hint.style.color = colors[score] || '#E8002A';
+
+    const ok = pw.length >= 8;
+    setWrap('w-pw1', ok, !ok && pw.length > 0);
+    document.getElementById('e-pw1').classList.toggle('show', !ok && pw.length > 0);
+    return ok;
+  }
+
+  function vConfirm() {
+    const p1 = document.getElementById('pw1').value;
+    const p2 = document.getElementById('pw2').value;
+    const ok = p1 === p2 && p2.length > 0;
+    setWrap('w-pw2', ok, !ok && p2.length > 0);
+    document.getElementById('e-pw2').classList.toggle('show', !ok && p2.length > 0);
+    return ok;
+  }
+
+  /* ── Update progress UI ── */
+  function updateProgress(s) {
+    const pcts   = [25, 50, 75, 100];
+    const labels = [
+      'Step 1 of 4 — Choose Role',
+      'Step 2 of 4 — Personal Details',
+      'Step 3 of 4 — Location',
+      'Step 4 of 4 — Set Password'
+    ];
+    document.getElementById('progFill').style.width  = pcts[s-1] + '%';
+    document.getElementById('progPct').textContent   = pcts[s-1] + '%';
+    document.getElementById('progLabel').textContent = labels[s-1];
+
+    for (let i = 1; i <= 4; i++) {
+      const d = document.getElementById('d'+i);
+      d.className = 'sdot';
+      if (i < s)  { d.classList.add('done');   d.innerHTML = '<i class="ti ti-check" style="font-size:11px"></i>'; }
+      if (i === s){ d.classList.add('active');  d.textContent = i; }
+      if (i > s)  { d.textContent = i; }
+    }
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById('l'+i).classList.toggle('done', i < s);
+    }
+    for (let i = 1; i <= 4; i++) {
+      const ti = document.getElementById('ti'+i);
+      ti.classList.remove('t-active','t-done');
+      if (i === s) ti.classList.add('t-active');
+      if (i < s)   ti.classList.add('t-done');
+    }
+  }
+
+  /* ── Navigation ── */
+  function goNext(s) {
+    // Validate current step
+    if (s === 1) {
+      if (!selectedRole) { document.getElementById('errRole').classList.add('show'); return; }
+    }
+    if (s === 2) {
+      const ok = [
+        vNotEmpty('fname','w-fname','e-fname'),
+        vNotEmpty('lname','w-lname','e-lname'),
+        vEmail(),
+        vPhone()
+      ];
+      if (ok.includes(false)) return;
+    }
+    if (s === 3) {
+      const ok = [
+        vNotEmpty('addr','w-addr','e-addr'),
+        vNotEmpty('city','w-city','e-city'),
+        vNotEmpty('state','w-state','e-state'),
+        vPin()
+      ];
+      if (ok.includes(false)) return;
+    }
+
+    document.getElementById('step'+s).classList.remove('active');
+    currentStep = s + 1;
+    document.getElementById('step'+currentStep).classList.add('active');
+    updateProgress(currentStep);
+    document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack(s) {
+    document.getElementById('step'+s).classList.remove('active');
+    currentStep = s - 1;
+    document.getElementById('step'+currentStep).classList.add('active');
+    updateProgress(currentStep);
+    document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── Final submit ── */
+  function submitForm() {
+    const pwOk   = evalPw();
+    const confOk = vConfirm();
+    if (!pwOk || !confOk) return;
+    if (!document.getElementById('terms').checked) {
+      alert('Please accept the Terms of Service to continue.');
+      return;
+    }
+
+    const btn  = document.getElementById('submitBtn');
+    const txt  = document.getElementById('submitTxt');
+    const spin = document.getElementById('submitSpin');
+    btn.disabled = true;
+    txt.style.display  = 'none';
+    spin.style.display = 'block';
+
+    setTimeout(() => {
+      // Hide all steps + progress
+      document.getElementById('step4').classList.remove('active');
+      document.getElementById('progWrap')  && (document.getElementById('progWrap').style.display = 'none');
+      document.querySelector('.prog-wrap').style.display = 'none';
+      document.getElementById('progFill').style.width = '100%';
+
+      // Build summary card
+      const fname  = document.getElementById('fname').value;
+      const lname  = document.getElementById('lname').value;
+      const email  = document.getElementById('email').value;
+      const city   = document.getElementById('city').value;
+      const state  = document.getElementById('state').value;
+      const phone  = document.getElementById('phone').value;
+      const roleLbl = selectedRole === 'farmer' ? '🧑‍🌾 Farmer' : '🛒 Consumer';
+
+      document.getElementById('successCard').innerHTML = `
+        <div class="sc-row"><i class="ti ti-user"></i><span class="sc-lbl">Full Name</span><span class="sc-val">${fname} ${lname}</span></div>
+        <div class="sc-row"><i class="ti ti-mail"></i><span class="sc-lbl">Email</span><span class="sc-val">${email}</span></div>
+        <div class="sc-row"><i class="ti ti-phone"></i><span class="sc-lbl">Phone</span><span class="sc-val">${phone}</span></div>
+        <div class="sc-row"><i class="ti ti-map-pin"></i><span class="sc-lbl">Location</span><span class="sc-val">${city}, ${state}</span></div>
+        <div class="sc-row"><i class="ti ti-leaf"></i><span class="sc-lbl">Role</span><span class="sc-val">${roleLbl}</span></div>
+      `;
+
+      document.getElementById('successState').style.display = 'flex';
+      document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1800);
+  }
+
+  /* ── Social handler — identical to login ── */
+  function handleSocial(btn) {
+    btn.style.background  = 'var(--green-lt)';
+    btn.style.borderColor = 'var(--green)';
+    btn.style.color       = 'var(--green)';
+    setTimeout(() => {
+      btn.style.background  = '';
+      btn.style.borderColor = '';
+      btn.style.color       = '';
+    }, 800);
+  }
+</script>
+
+</body>
+</html>
