@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Orders | Farm to Home</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/orders.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ==========================
+            SIDEBAR
+    =========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <h2>Farm to Home</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    <i class="fa-solid fa-box"></i>
+                    Products
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="orders.html">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
+            
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ==========================
+            MAIN CONTENT
+    =========================== -->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="page-header">
+
+            <div>
+
+                <h1>Orders Management</h1>
+
+                <p>
+                    Manage customer orders, delivery status and order history.
+                </p>
+
+            </div>
+
+            <button id="addOrderBtn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                New Order
+
+            </button>
+
+        </header>
+
+        <!-- Banner -->
+
+        <section class="orders-banner">
+
+            <div class="banner-text">
+
+                <h2>Track Every Order Efficiently</h2>
+
+                <p>
+
+                    View all customer orders, update delivery status,
+                    manage pending requests and monitor completed deliveries.
+
+                </p>
+
+            </div>
+
+            <div class="banner-image">
+
+                <img src="images/dashboard-banner.jpg" alt="Orders Banner">
+
+            </div>
+
+        </section>
+
+        <!-- Search -->
+
+        <section class="toolbar">
+
+            <input
+                type="text"
+                id="searchOrder"
+                placeholder="Search customer or product...">
+
+            <select id="statusFilter">
+
+                <option value="All">All Status</option>
+
+                <option value="Pending">Pending</option>
+
+                <option value="Processing">Processing</option>
+
+                <option value="Delivered">Delivered</option>
+
+                <option value="Cancelled">Cancelled</option>
+
+            </select>
+
+        </section>
+
+        <!-- Orders Table -->
+
+        <section class="table-section">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order ID</th>
+
+                        <th>Customer</th>
+
+                        <th>Product</th>
+
+                        <th>Quantity</th>
+
+                        <th>Total</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="ordersTable">
+
+                    <!-- JavaScript will load orders here -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==========================
+        ADD ORDER MODAL
+=========================== -->
+
+<div class="modal" id="orderModal">
+
+    <div class="modal-content">
+
+        <span class="close" id="closeModal">&times;</span>
+
+        <h2>Create New Order</h2>
+
+        <form id="orderForm">
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Customer Name"
+                required>
+
+            <input
+                type="text"
+                id="productName"
+                placeholder="Product Name"
+                required>
+
+            <input
+                type="number"
+                id="quantity"
+                placeholder="Quantity"
+                required>
+
+            <input
+                type="number"
+                id="totalPrice"
+                placeholder="Total Price"
+                required>
+
+            <select id="orderStatus">
+
+                <option>Pending</option>
+
+                <option>Processing</option>
+
+                <option>Delivered</option>
+
+                <option>Cancelled</option>
+
+            </select>
+
+            <button type="submit">
+
+                Save Order
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- JavaScript -->
+
+<script src="js/orders.js"></script>
+
+</body>
+</html>

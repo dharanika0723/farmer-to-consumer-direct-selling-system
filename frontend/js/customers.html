@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customers | Farm2Home</title>
+
+    <link rel="stylesheet" href="css/customers.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================
+         SIDEBAR
+    =========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Farm2Home</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    <i class="fa-solid fa-seedling"></i>
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+            <li>
+                <a href="login.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- ==========================
+         MAIN CONTENT
+    =========================== -->
+
+    <main class="main-content">
+
+
+        <!-- ==========================
+             PAGE HEADER
+        =========================== -->
+
+        <section class="page-header">
+
+            <h1>
+
+                <i class="fa-solid fa-users"></i>
+
+                Customers Management
+
+            </h1>
+
+            <p>
+
+                View registered customers, monitor their activity,
+                and understand purchasing trends.
+
+            </p>
+
+        </section>
+
+
+        <!-- ==========================
+             CUSTOMER BANNER
+        =========================== -->
+
+        <section class="customer-banner">
+
+            <div class="banner-content">
+
+                <div class="banner-text">
+
+                    <h2>
+
+                        👥 Your Customer Network
+
+                    </h2>
+
+                    <p>
+
+                        Manage customer information, monitor their
+                        purchase history, and build stronger
+                        relationships with your buyers.
+
+                    </p>
+
+                </div>
+
+                <div class="banner-image">
+
+                    <img src="images/customers-banner.jpg"
+                        alt="Customers Banner">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================
+             STATISTICS
+        =========================== -->
+
+        <section class="customer-stats">
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3 id="totalCustomers">0</h3>
+
+                <p>Total Customers</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <h3 id="totalOrders">0</h3>
+
+                <p>Total Orders</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                <h3 id="totalRevenue">₹0</h3>
+
+                <p>Total Revenue</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================
+             SEARCH
+        =========================== -->
+
+        <section class="search-section">
+
+            <input
+                type="text"
+                id="searchCustomer"
+                placeholder="Search customer by name, email or phone...">
+
+        </section>
+
+
+        <!-- ==========================
+             TABLE
+        =========================== -->
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Phone</th>
+
+                        <th>Orders</th>
+
+                        <th>Total Spent</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="customersTable">
+
+                    <!-- JavaScript -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/customers.js"></script>
+
+</body>
+
+</html>

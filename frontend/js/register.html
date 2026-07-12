@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Farm2Home</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/register.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <!-- Left Image -->
+        <div class="register-image">
+
+            <img src="images/register-banner.jpg" alt="Register Banner">
+
+        </div>
+
+        <!-- Register Form -->
+        <div class="register-form">
+
+            <div class="form-box">
+
+                <h1>Create Account</h1>
+
+                <p>
+                    Join Farm2Home and connect farmers directly with consumers.
+                </p>
+
+                <form id="registerForm">
+
+                    <!-- Full Name -->
+                    <div class="input-group">
+
+                        <label>Full Name</label>
+
+                        <div class="input-field">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name">
+
+                        </div>
+
+                        <small id="nameError"></small>
+
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-group">
+
+                        <label>Email Address</label>
+
+                        <div class="input-field">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email">
+
+                        </div>
+
+                        <small id="emailError"></small>
+
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="input-group">
+
+                        <label>Phone Number</label>
+
+                        <div class="input-field">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter your phone number">
+
+                        </div>
+
+                        <small id="phoneError"></small>
+
+                    </div>
+
+                    <!-- Role -->
+                    <div class="input-group">
+
+                        <label>Register As</label>
+
+                        <div class="input-field">
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <select id="role">
+
+                                <option value="">Select Role</option>
+                                <option value="Farmer">Farmer</option>
+                                <option value="Customer">Customer</option>
+
+                            </select>
+
+                        </div>
+
+                        <small id="roleError"></small>
+
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="input-field">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create password">
+
+                            <i
+                                class="fa-solid fa-eye"
+                                id="togglePassword"></i>
+
+                        </div>
+
+                        <small id="passwordError"></small>
+
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-group">
+
+                        <label>Confirm Password</label>
+
+                        <div class="input-field">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm password">
+
+                            <i
+                                class="fa-solid fa-eye"
+                                id="toggleConfirmPassword"></i>
+
+                        </div>
+
+                        <small id="confirmPasswordError"></small>
+
+                    </div>
+
+                    <!-- Register Button -->
+                    <button type="submit" class="register-btn">
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+                <!-- Login Link -->
+                <div class="login-link">
+
+                    <p>
+
+                        Already have an account?
+
+                        <a href="login.html">
+
+                            Login
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+                <!-- Home Link -->
+                <div class="home-link">
+
+                    <a href="index.html">
+
+                        ← Back to Home
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/register.js"></script>
+
+</body>
+
+</html>
