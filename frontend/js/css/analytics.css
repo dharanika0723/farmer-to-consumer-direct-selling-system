@@ -1,0 +1,694 @@
+/* =====================================================
+   FARM2HOME
+   ANALYTICS PAGE - PART 1
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    display:flex;
+    min-height:100vh;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    width:260px;
+    background:linear-gradient(180deg,#2e7d32,#1b5e20);
+    color:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:30px 20px;
+    overflow-y:auto;
+
+}
+
+.logo{
+
+    text-align:center;
+    margin-bottom:40px;
+
+}
+
+.logo h2{
+
+    font-size:38px;
+    font-weight:700;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+}
+
+.sidebar ul li{
+
+    margin-bottom:12px;
+
+}
+
+.sidebar ul li a{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:#fff;
+    padding:14px 18px;
+    border-radius:10px;
+    transition:.3s;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.sidebar ul li.active a{
+
+    background:#fff;
+    color:#2e7d32;
+    font-weight:600;
+
+}
+
+.sidebar i{
+
+    width:22px;
+    text-align:center;
+
+}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content{
+
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:35px;
+
+}
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header{
+
+    margin-bottom:25px;
+
+}
+
+.page-header h1{
+
+    color:#2e7d32;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+
+}
+
+.page-header p{
+
+    color:#666;
+    font-size:18px;
+    line-height:1.7;
+
+}
+
+/* =====================================================
+   ANALYTICS BANNER
+===================================================== */
+
+.analytics-banner{
+
+    background:linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.banner-content{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+
+}
+
+.banner-text{
+
+    flex:1;
+
+}
+
+.banner-text h2{
+
+    color:#1b5e20;
+    font-size:34px;
+    margin-bottom:15px;
+
+}
+
+.banner-text p{
+
+    color:#555;
+    line-height:1.8;
+    max-width:650px;
+
+}
+
+.banner-image{
+
+    flex:1;
+    text-align:right;
+
+}
+
+.banner-image img{
+
+    width:100%;
+    max-width:320px;
+
+}
+/* =====================================================
+   SUMMARY CARDS
+===================================================== */
+
+.summary-cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-bottom:30px;
+
+}
+
+.summary-card{
+
+    background:#fff;
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+    cursor:pointer;
+
+}
+
+.summary-card:hover{
+
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(46,125,50,.18);
+
+}
+
+.summary-card i{
+
+    font-size:42px;
+    color:#2e7d32;
+    margin-bottom:15px;
+
+}
+
+.summary-card h3{
+
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+
+}
+
+.summary-card p{
+
+    color:#666;
+    font-size:16px;
+
+}
+
+
+/* =====================================================
+   CHART SECTION
+===================================================== */
+
+.charts-section{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:25px;
+    margin-bottom:30px;
+
+}
+
+.chart-card{
+
+    background:#fff;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.card-header{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+
+}
+
+.card-header h2{
+
+    color:#2e7d32;
+    font-size:24px;
+
+}
+
+.card-header i{
+
+    font-size:24px;
+    color:#2e7d32;
+
+}
+
+.chart-card canvas{
+
+    width:100% !important;
+    height:320px !important;
+
+}
+
+
+/* =====================================================
+   INSIGHT CARDS
+===================================================== */
+
+.insight-section{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    margin-bottom:30px;
+
+}
+
+.insight-card{
+
+    background:#fff;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+
+}
+
+.insight-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.insight-title{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+
+}
+
+.insight-title i{
+
+    font-size:30px;
+    color:#2e7d32;
+
+}
+
+.insight-title h3{
+
+    color:#2e7d32;
+    font-size:22px;
+
+}
+
+.insight-content h2{
+
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+
+}
+
+.insight-content p{
+
+    color:#666;
+    font-size:16px;
+
+}
+/* =====================================================
+   RECENT ORDERS TABLE
+===================================================== */
+
+.recent-orders{
+
+    background:#fff;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.section-title{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+
+}
+
+.section-title h2{
+
+    color:#2e7d32;
+    font-size:28px;
+
+}
+
+.section-title i{
+
+    color:#2e7d32;
+    font-size:28px;
+
+}
+
+.table-container{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#2e7d32;
+    color:#fff;
+
+}
+
+thead th{
+
+    padding:18px;
+    text-align:left;
+    font-size:16px;
+    font-weight:600;
+
+}
+
+tbody tr{
+
+    border-bottom:1px solid #eee;
+    transition:.3s;
+
+}
+
+tbody tr:hover{
+
+    background:#f5fff5;
+
+}
+
+tbody td{
+
+    padding:18px;
+    color:#555;
+
+}
+
+
+/* =====================================================
+   ORDER STATUS
+===================================================== */
+
+.status{
+
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+
+}
+
+.pending{
+
+    background:#fff3cd;
+    color:#856404;
+
+}
+
+.processing{
+
+    background:#d1ecf1;
+    color:#0c5460;
+
+}
+
+.delivered{
+
+    background:#d4edda;
+    color:#155724;
+
+}
+
+.cancelled{
+
+    background:#f8d7da;
+    color:#721c24;
+
+}
+
+
+/* =====================================================
+   EMPTY DATA
+===================================================== */
+
+.no-data{
+
+    text-align:center;
+    padding:50px;
+    color:#888;
+
+}
+
+.no-data i{
+
+    font-size:70px;
+    color:#cfd8dc;
+    margin-bottom:20px;
+    display:block;
+
+}
+
+.no-data h3{
+
+    color:#666;
+    margin-bottom:10px;
+
+}
+
+.no-data p{
+
+    color:#999;
+
+}
+
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+    height:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf5ed;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2e7d32;
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#1b5e20;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        width:220px;
+
+    }
+
+    .main-content{
+
+        margin-left:220px;
+        width:calc(100% - 220px);
+
+    }
+
+    .banner-content{
+
+        flex-direction:column;
+        text-align:center;
+
+    }
+
+    .banner-image{
+
+        text-align:center;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    body{
+
+        display:block;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+        width:100%;
+        height:auto;
+
+    }
+
+    .main-content{
+
+        margin-left:0;
+        width:100%;
+        padding:20px;
+
+    }
+
+    .summary-cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .charts-section{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .insight-section{
+
+        grid-template-columns:1fr;
+
+    }
+
+    table{
+
+        min-width:800px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .page-header h1{
+
+        font-size:30px;
+
+    }
+
+    .banner-text h2{
+
+        font-size:24px;
+
+    }
+
+    .chart-card canvas{
+
+        height:250px !important;
+
+    }
+
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print{
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+    .main-content{
+
+        width:100%;
+        margin:0;
+
+    }
+
+}
+
+/* =====================================================
+   END OF ANALYTICS CSS
+===================================================== */
