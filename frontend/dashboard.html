@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Farm2Home</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ===============================
+            SIDEBAR
+    ================================ -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Farm2Home</h2>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    <i class="fa-solid fa-seedling"></i>
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ===============================
+            MAIN CONTENT
+    ================================ -->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p>Welcome back,
+                    <span id="username">User</span> 👋
+                </p>
+
+            </div>
+
+            <a href="login.html" class="logout-btn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </header>
+        <!-- ===============================
+        WELCOME BANNER
+================================ -->
+
+<section class="welcome-banner">
+
+    <div class="banner-content">
+
+        <div class="banner-text">
+
+            <h2>🌿 Fresh From Farm to Home</h2>
+
+            <p>
+                Buy fresh vegetables, fruits, grains and dairy products
+                directly from trusted farmers. Support local agriculture
+                while enjoying fresh and healthy food.
+            </p>
+
+            <a href="products.html" class="banner-btn">
+                Explore Products
+            </a>
+
+        </div>
+
+        <div class="banner-image">
+
+            <img src="images/dashboard-banner.jpg" alt="Farmer Banner">
+
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- Statistics -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fa-solid fa-seedling"></i>
+
+                <h3>Total Products</h3>
+
+                <h2 id="totalProducts">25</h2>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <h3>Total Orders</h3>
+
+                <h2 id="totalOrders">15</h2>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>Total Customers</h3>
+
+                <h2 id="totalCustomers">40</h2>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                <h3>Revenue</h3>
+
+                <h2 id="revenue">₹15,000</h2>
+
+            </div>
+
+        </section>
+
+        <!-- Recent Orders -->
+
+        <section class="table-section">
+
+            <h2>Recent Orders</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="recentOrders">
+
+            </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Quick Actions -->
+
+        <section class="quick-actions">
+
+            <h2>Quick Actions</h2>
+
+            <div class="action-buttons">
+
+                <a href="products.html" class="action-btn">
+
+                    Add Product
+
+                </a>
+
+                <a href="orders.html" class="action-btn">
+
+                    View Orders
+
+                </a>
+
+                <a href="profile.html" class="action-btn">
+
+                    Update Profile
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

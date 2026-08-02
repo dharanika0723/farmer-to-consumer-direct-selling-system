@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics | Farm2Home</title>
+
+    <link rel="stylesheet"
+        href="css/analytics.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- =====================================
+            SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Farm2Home</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="products.html">
+
+                    <i class="fa-solid fa-seedling"></i>
+
+                    Products
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="orders.html">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="customers.html">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="analytics.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="reports.html">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="settings.html">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="login.html">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- =====================================
+            MAIN CONTENT
+    ====================================== -->
+
+    <main class="main-content">
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <h1>
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Analytics Dashboard
+
+            </h1>
+
+            <p>
+
+                Monitor your farm performance,
+                sales, products and customer insights.
+
+            </p>
+
+        </section>
+
+        <!-- BANNER -->
+
+        <section class="analytics-banner">
+
+            <div class="banner-content">
+
+                <div class="banner-text">
+
+                    <h2>
+
+                        📊 Business Performance Overview
+
+                    </h2>
+
+                    <p>
+
+                        View real-time insights about
+                        products, orders, customers,
+                        revenue and stock availability.
+
+                    </p>
+
+                </div>
+
+                <div class="banner-image">
+
+                    <img src="images/analytics-banner.jpg"
+                        alt="Analytics Banner">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SUMMARY CARDS -->
+
+        <section class="summary-cards">
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-box"></i>
+
+                <h3 id="totalProducts">0</h3>
+
+                <p>Total Products</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <h3 id="totalOrders">0</h3>
+
+                <p>Total Orders</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3 id="totalCustomers">0</h3>
+
+                <p>Total Customers</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                <h3 id="totalRevenue">₹0</h3>
+
+                <p>Total Revenue</p>
+
+            </div>
+
+        </section>
+                <!-- =====================================
+                CHART SECTION
+        ====================================== -->
+
+        <section class="charts-section">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                        Sales Overview
+
+                    </h2>
+
+                </div>
+
+                <canvas id="salesChart"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                        Product Categories
+
+                    </h2>
+
+                </div>
+
+                <canvas id="categoryChart"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+                INSIGHT CARDS
+        ====================================== -->
+
+        <section class="insight-section">
+
+            <div class="insight-card">
+
+                <div class="insight-title">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                    <h3>Best Selling Product</h3>
+
+                </div>
+
+                <div class="insight-content">
+
+                    <h2 id="bestProduct">
+
+                        --
+
+                    </h2>
+
+                    <p>
+
+                        Highest ordered product
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="insight-card">
+
+                <div class="insight-title">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <h3>Low Stock Product</h3>
+
+                </div>
+
+                <div class="insight-content">
+
+                    <h2 id="lowStockProduct">
+
+                        --
+
+                    </h2>
+
+                    <p>
+
+                        Needs stock refill
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+                RECENT ORDERS
+        ====================================== -->
+
+        <section class="recent-orders">
+
+            <div class="section-title">
+
+                <h2>
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    Recent Orders
+
+                </h2>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Order ID</th>
+
+                            <th>Customer</th>
+
+                            <th>Product</th>
+
+                            <th>Quantity</th>
+
+                            <th>Total</th>
+
+                            <th>Status</th>
+
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recentOrdersTable">
+
+                        <!-- JavaScript -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="js/analytics.js"></script>
+
+</body>
+
+</html>

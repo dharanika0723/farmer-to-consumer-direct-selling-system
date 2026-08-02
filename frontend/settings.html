@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Farm2Home</title>
+
+    <link rel="stylesheet"
+        href="css/settings.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- =====================================
+            SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Farm2Home</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="products.html">
+
+                    <i class="fa-solid fa-seedling"></i>
+
+                    Products
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="orders.html">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="customers.html">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="analytics.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="reports.html">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="settings.html">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="login.html">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- =====================================
+            MAIN CONTENT
+    ====================================== -->
+
+    <main class="main-content">
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <h1>
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </h1>
+
+            <p>
+
+                Manage your Farm2Home account preferences,
+                security, notifications and application settings.
+
+            </p>
+
+        </section>
+
+        <!-- SETTINGS BANNER -->
+
+        <section class="settings-banner">
+
+            <div class="banner-content">
+
+                <div class="banner-text">
+
+                    <h2>
+
+                        ⚙️ Account & System Settings
+
+                    </h2>
+
+                    <p>
+
+                        Update your personal information,
+                        customize notifications, change your
+                        password, select your preferred language,
+                        and manage your Farm2Home account.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PROFILE SETTINGS -->
+
+        <section class="settings-card">
+
+            <h2>
+
+                <i class="fa-solid fa-user"></i>
+
+                Profile Settings
+
+            </h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+
+                        Full Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your name">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Phone Number
+
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter phone number">
+
+                </div>
+
+            </div>
+
+            <button id="saveProfileBtn">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Changes
+
+            </button>
+
+        </section>
+
+        <!-- CHANGE PASSWORD -->
+
+        <section class="settings-card">
+
+            <h2>
+
+                <i class="fa-solid fa-lock"></i>
+
+                Change Password
+
+            </h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+
+                        Current Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="currentPassword">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        New Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Confirm Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword">
+
+                </div>
+
+            </div>
+
+            <button id="changePasswordBtn">
+
+                <i class="fa-solid fa-key"></i>
+
+                Update Password
+
+            </button>
+
+        </section>
+                <!-- =====================================
+                NOTIFICATION SETTINGS
+        ====================================== -->
+
+        <section class="settings-card">
+
+            <h2>
+
+                <i class="fa-solid fa-bell"></i>
+
+                Notification Settings
+
+            </h2>
+
+            <div class="setting-item">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="emailNotification"
+                        checked>
+
+                    Email Notifications
+
+                </label>
+
+            </div>
+
+            <div class="setting-item">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="orderNotification"
+                        checked>
+
+                    Order Notifications
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+                APPEARANCE
+        ====================================== -->
+
+        <section class="settings-card">
+
+            <h2>
+
+                <i class="fa-solid fa-moon"></i>
+
+                Appearance
+
+            </h2>
+
+            <div class="setting-item">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="theme"
+                        value="light"
+                        checked>
+
+                    Light Mode
+
+                </label>
+
+            </div>
+
+            <div class="setting-item">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="theme"
+                        value="dark">
+
+                    Dark Mode
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+                LANGUAGE
+        ====================================== -->
+
+        <section class="settings-card">
+
+            <h2>
+
+                <i class="fa-solid fa-language"></i>
+
+                Language
+
+            </h2>
+
+            <select id="language">
+
+                <option value="English">
+
+                    English
+
+                </option>
+
+                <option value="Tamil">
+
+                    Tamil
+
+                </option>
+
+                <option value="Hindi">
+
+                    Hindi
+
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- =====================================
+                FARMER SETTINGS
+        ====================================== -->
+
+        <section
+            class="settings-card"
+            id="farmerSettings">
+
+            <h2>
+
+                <i class="fa-solid fa-database"></i>
+
+                Farmer Settings
+
+            </h2>
+
+            <p>
+
+                Reset your application data.
+
+            </p>
+
+            <div class="danger-buttons">
+
+                <button id="resetProductsBtn">
+
+                    <i class="fa-solid fa-seedling"></i>
+
+                    Reset Products
+
+                </button>
+
+                <button id="resetOrdersBtn">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Reset Orders
+
+                </button>
+
+                <button id="resetCustomersBtn">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Reset Customers
+
+                </button>
+
+                <button id="resetAppBtn">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Reset Application
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+                LOGOUT
+        ====================================== -->
+
+        <section class="settings-card">
+
+            <h2>
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Account
+
+            </h2>
+
+            <button id="logoutBtn">
+
+                <i class="fa-solid fa-power-off"></i>
+
+                Logout
+
+            </button>
+
+        </section>
+
+    </main>
+
+    <script src="js/settings.js"></script>
+
+</body>
+
+</html>

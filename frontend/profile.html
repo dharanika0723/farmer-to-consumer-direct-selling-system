@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | Farm2Home</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/profile.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ===============================
+            SIDEBAR
+    ================================ -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>Farm2Home</h2>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    <i class="fa-solid fa-seedling"></i>
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ===============================
+            MAIN CONTENT
+    ================================ -->
+
+    <main class="main-content">
+
+        <!-- Top Bar -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>My Profile</h1>
+
+                <p>Manage your personal information</p>
+
+            </div>
+
+            <a href="dashboard.html" class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Dashboard
+
+            </a>
+
+        </header>
+
+        <!-- Profile Card -->
+
+        <section class="profile-card">
+
+            <img src="images/profile-avatar.jpg" alt="Profile">
+
+            <h2 id="profileName">User Name</h2>
+
+            <p id="profileRole">Farmer / Consumer</p>
+
+        </section>
+
+        <!-- Profile Form -->
+
+        <section class="profile-form">
+
+            <h2>Personal Information</h2>
+
+            <form id="profileForm">
+
+                <div class="form-grid">
+
+                    <!-- Full Name -->
+
+                    <div class="input-group">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter Full Name">
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="input-group">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter Email">
+
+                    </div>
+
+                    <!-- Phone -->
+
+                    <div class="input-group">
+
+                        <label>Phone Number</label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter Phone Number">
+
+                    </div>
+
+                    <!-- Role -->
+
+                    <div class="input-group">
+
+                        <label>Role</label>
+
+                        <select id="role">
+
+                            <option value="Farmer">Farmer</option>
+                            <option value="Customer">Customer</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Address -->
+
+                    <div class="input-group full-width">
+
+                        <label>Address</label>
+
+                        <input
+                            type="text"
+                            id="address"
+                            placeholder="Enter Address">
+
+                    </div>
+
+                    <!-- City -->
+
+                    <div class="input-group">
+
+                        <label>City</label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="Enter City">
+
+                    </div>
+
+                    <!-- State -->
+
+                    <div class="input-group">
+
+                        <label>State</label>
+
+                        <input
+                            type="text"
+                            id="state"
+                            placeholder="Enter State">
+
+                    </div>
+
+                    <!-- Pincode -->
+
+                    <div class="input-group">
+
+                        <label>Pincode</label>
+
+                        <input
+                            type="text"
+                            id="pincode"
+                            placeholder="Enter Pincode">
+
+                    </div>
+
+                </div>
+
+                <div class="button-group">
+
+                    <button
+                        type="submit"
+                        class="save-btn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Changes
+
+                    </button>
+
+                    <a
+                        href="dashboard.html"
+                        class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="js/profile.js"></script>
+
+</body>
+
+</html>

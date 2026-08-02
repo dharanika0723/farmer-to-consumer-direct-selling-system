@@ -1,0 +1,698 @@
+/* =====================================================
+   FARM2HOME
+   CUSTOMERS PAGE - PART 1
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    display:flex;
+    min-height:100vh;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    width:260px;
+    background:linear-gradient(180deg,#2e7d32,#1b5e20);
+    color:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:30px 20px;
+    overflow-y:auto;
+
+}
+
+.logo{
+
+    text-align:center;
+    margin-bottom:40px;
+
+}
+
+.logo h2{
+
+    font-size:38px;
+    font-weight:700;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+}
+
+.sidebar ul li{
+
+    margin-bottom:12px;
+
+}
+
+.sidebar ul li a{
+
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 18px;
+    border-radius:10px;
+    transition:.3s;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.sidebar ul li.active a{
+
+    background:#fff;
+    color:#2e7d32;
+    font-weight:600;
+
+}
+
+.sidebar i{
+
+    width:22px;
+    text-align:center;
+
+}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content{
+
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:35px;
+
+}
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header{
+
+    margin-bottom:25px;
+
+}
+
+.page-header h1{
+
+    color:#2e7d32;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+
+}
+
+.page-header p{
+
+    color:#666;
+    font-size:18px;
+    line-height:1.7;
+
+}
+
+/* =====================================================
+   CUSTOMER BANNER
+===================================================== */
+
+.customer-banner{
+
+    background:linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.banner-content{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+
+}
+
+.banner-text{
+
+    flex:1;
+
+}
+
+.banner-text h2{
+
+    color:#1b5e20;
+    font-size:34px;
+    margin-bottom:15px;
+
+}
+
+.banner-text p{
+
+    color:#555;
+    line-height:1.8;
+    max-width:650px;
+
+}
+
+.banner-image{
+
+    flex:1;
+    text-align:right;
+
+}
+
+.banner-image img{
+
+    width:100%;
+    max-width:320px;
+
+}
+/* =====================================================
+   CUSTOMER STATISTICS
+===================================================== */
+
+.customer-stats{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-bottom:30px;
+
+}
+
+.stat-card{
+
+    background:#fff;
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+    cursor:pointer;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(46,125,50,.18);
+
+}
+
+.stat-card i{
+
+    font-size:40px;
+    color:#2e7d32;
+    margin-bottom:15px;
+
+}
+
+.stat-card h3{
+
+    font-size:34px;
+    color:#222;
+    margin-bottom:8px;
+
+}
+
+.stat-card p{
+
+    color:#666;
+    font-size:16px;
+
+}
+
+
+/* =====================================================
+   SEARCH SECTION
+===================================================== */
+
+.search-section{
+
+    margin-bottom:25px;
+
+}
+
+.search-section input{
+
+    width:100%;
+    padding:16px 20px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+    transition:.3s;
+
+}
+
+.search-section input:focus{
+
+    border-color:#2e7d32;
+    box-shadow:0 0 10px rgba(46,125,50,.15);
+
+}
+
+
+/* =====================================================
+   CUSTOMER TABLE
+===================================================== */
+
+.table-container{
+
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#2e7d32;
+    color:#fff;
+
+}
+
+thead th{
+
+    padding:18px;
+    text-align:left;
+    font-size:16px;
+    font-weight:600;
+
+}
+
+tbody tr{
+
+    border-bottom:1px solid #eee;
+    transition:.25s;
+
+}
+
+tbody tr:hover{
+
+    background:#f4fff4;
+
+}
+
+tbody td{
+
+    padding:18px;
+    color:#444;
+    vertical-align:middle;
+
+}
+
+
+/* =====================================================
+   CUSTOMER AVATAR
+===================================================== */
+
+.customer-info{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
+.customer-avatar{
+
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#2e7d32;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+    font-weight:600;
+
+}
+
+
+/* =====================================================
+   TOTAL SPENT
+===================================================== */
+
+.total-spent{
+
+    color:#2e7d32;
+    font-weight:700;
+    font-size:17px;
+
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.action-buttons{
+
+    display:flex;
+    gap:10px;
+
+}
+
+.view-btn,
+.delete-btn{
+
+    border:none;
+    cursor:pointer;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:14px;
+    transition:.3s;
+
+}
+
+.view-btn{
+
+    background:#2e7d32;
+    color:#fff;
+
+}
+
+.view-btn:hover{
+
+    background:#1b5e20;
+
+}
+
+.delete-btn{
+
+    background:#e53935;
+    color:#fff;
+
+}
+
+.delete-btn:hover{
+
+    background:#c62828;
+
+}
+/* =====================================================
+   NO CUSTOMERS
+===================================================== */
+
+.no-customers{
+
+    text-align:center;
+    padding:60px 20px;
+    color:#777;
+    font-size:18px;
+
+}
+
+.no-customers i{
+
+    font-size:70px;
+    color:#cfd8dc;
+    margin-bottom:20px;
+    display:block;
+
+}
+
+.no-customers h2{
+
+    color:#555;
+    margin-bottom:10px;
+
+}
+
+.no-customers p{
+
+    color:#888;
+
+}
+
+
+/* =====================================================
+   ACCESS DENIED
+===================================================== */
+
+.access-denied{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    min-height:80vh;
+    text-align:center;
+
+}
+
+.access-denied i{
+
+    font-size:90px;
+    color:#e53935;
+    margin-bottom:25px;
+
+}
+
+.access-denied h2{
+
+    font-size:40px;
+    color:#e53935;
+    margin-bottom:15px;
+
+}
+
+.access-denied p{
+
+    color:#666;
+    font-size:18px;
+    max-width:550px;
+    line-height:1.7;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+
+    text-align:center;
+    padding:50px;
+    color:#2e7d32;
+    font-size:18px;
+
+}
+
+.loading i{
+
+    font-size:45px;
+    animation:spin 1s linear infinite;
+    margin-bottom:15px;
+    display:block;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf5ed;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2e7d32;
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#1b5e20;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        width:220px;
+
+    }
+
+    .main-content{
+
+        margin-left:220px;
+        width:calc(100% - 220px);
+
+    }
+
+    .banner-content{
+
+        flex-direction:column;
+        text-align:center;
+
+    }
+
+    .banner-image{
+
+        text-align:center;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    body{
+
+        display:block;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+        width:100%;
+        height:auto;
+
+    }
+
+    .main-content{
+
+        margin-left:0;
+        width:100%;
+        padding:20px;
+
+    }
+
+    .customer-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .table-container{
+
+        overflow-x:auto;
+
+    }
+
+    table{
+
+        min-width:850px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .page-header h1{
+
+        font-size:30px;
+
+    }
+
+    .banner-text h2{
+
+        font-size:24px;
+
+    }
+
+    .search-section input{
+
+        font-size:15px;
+
+    }
+
+}
+
+
+/* =====================================================
+   PRINT MODE
+===================================================== */
+
+@media print{
+
+    .sidebar,
+    .search-section,
+    .action-buttons{
+
+        display:none;
+
+    }
+
+    .main-content{
+
+        margin:0;
+        width:100%;
+
+    }
+
+}
+/* =====================================================
+   END OF CUSTOMERS CSS
+===================================================== */
